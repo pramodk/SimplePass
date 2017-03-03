@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+cmake_policy(SET CMP0057 NEW)
+
 find_program(LLVM_CONFIG NAMES llvm-config DOC "Path to llvm-config utility")
 if (${LLVM_CONFIG} STREQUAL "LLVM_CONFIG-NOTFOUND")
 	message(SEND_ERROR "llvm-config not found, please manually set path with -DLLVM_CONFIG")
@@ -21,6 +23,7 @@ include(AddLLVM)
 add_definitions(${LLVM_DEFINITIONS})
 include_directories(${LLVM_INCLUDE_DIRS})
 link_directories(${LLVM_LIBRARY_DIRS})
+
 
 add_llvm_loadable_module(SimplePass 
 	SimplePass.cc
